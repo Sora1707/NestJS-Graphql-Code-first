@@ -1,0 +1,49 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Article {
+  id: String!
+  content: String!
+  author: User!
+}
+
+type User {
+  id: String!
+  username: String!
+  password: String!
+  roles: [Role]
+  articles: [Article]!
+}
+
+enum Role {
+  Admin
+  User
+}
+
+type Event {
+  id: UUID!
+  createdAt: Date!
+}
+
+"""A simple UUID parser"""
+scalar UUID
+
+"""Date custom scalar type"""
+scalar Date
+
+type Query {
+  findAllUser: [User!]!
+  users: [User!]!
+  user(username: String! = "Sora"): User!
+  login(username: String, password: String): Boolean!
+  findAllArticle: [Article!]!
+  articles: Article!
+  event: Event!
+}
+
+type Mutation {
+  createUser(username: String!, password: String!, roles: [Role!] = [User]): User!
+  deleteByUsername(username: String!): User!
+  updateUser(username: String!, password: String!, roles: [Role!] = [User]): User!
+}
